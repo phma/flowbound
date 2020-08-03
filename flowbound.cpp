@@ -1,7 +1,6 @@
 /* Copyright 2020 Pierre Abbat
  * Licensed under the Apache License, Version 2.0.
  */
-#include <gmpxx.h>
 #include <iostream>
 #include <vector>
 #include <set>
