@@ -1,6 +1,6 @@
 project(flowbound)
 cmake_minimum_required(VERSION 3.8.0)
-add_executable(flowbound flowbound.cpp eisenstein.cpp)
+add_executable(flowbound flowbound.cpp eisenstein.cpp flowsnake.cpp)
 
 include(TestBigEndian)
 include(CheckTypeSize)
