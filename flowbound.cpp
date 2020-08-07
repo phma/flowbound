@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
   {
     refine();
     prune();
+    cout<<i<<' '<<boundary.size()<<endl;
   }
   for (i=0;i<boundary.size();i++)
     cout<<toBase7(boundary[i].a.cartx())<<','<<toBase7(boundary[i].a.carty())<<endl;

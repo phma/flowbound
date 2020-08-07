@@ -51,7 +51,7 @@ void prune()
     if (boundary[i].a.cartx()>max)
       max=boundary[i].a.cartx();
   }
-  diff=boundary[i].b-boundary[i].a;
+  diff=boundary[0].b-boundary[0].a;
   lensq=diff.norm();
   cutoff=max-sqrt(4*lensq.get_d());
   for (i=0;i<boundary.size();i++)
