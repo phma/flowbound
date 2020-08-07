@@ -30,3 +30,4 @@ extern std::vector<Segment> boundary;
 
 void init();
 void refine();
+void prune();

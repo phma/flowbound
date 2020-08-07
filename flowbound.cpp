@@ -12,9 +12,11 @@ int main(int argc, char *argv[])
 {
   int i,j;
   init();
-  refine();
-  refine();
-  refine();
+  for (i=0;i<33;i++)
+  {
+    refine();
+    prune();
+  }
   for (i=0;i<boundary.size();i++)
     cout<<boundary[i].a.getx()<<','<<boundary[i].a.gety()<<endl;
   return 0;

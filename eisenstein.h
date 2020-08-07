@@ -81,6 +81,14 @@ public:
   {
     return y;
   }
+  mpz_class cartx()
+  { // This returns twice the actual x coordinate.
+    return 2*x-y;
+  }
+  mpz_class carty()
+  { // This returns √(4/3) times the actual y coordinate.
+    return y;
+  }
   operator std::complex<double>() const
   {
     return std::complex<double>((x.get_d()-y.get_d())/2.,y.get_d()*M_SQRT_3_4);

@@ -37,3 +37,25 @@ void refine()
   }
   swap(boundary,newbdy);
 }
+
+void prune()
+{
+  vector<Segment> newbdy;
+  int i;
+  Eisenstein diff;
+  mpz_class max,lensq,cutoff;
+  for (i=0;i<boundary.size();i++)
+  {
+    if (boundary[i].a.cartx()>max)
+      max=boundary[i].a.cartx();
+    if (boundary[i].a.cartx()>max)
+      max=boundary[i].a.cartx();
+  }
+  diff=boundary[i].b-boundary[i].a;
+  lensq=diff.norm();
+  cutoff=max-sqrt(4*lensq.get_d());
+  for (i=0;i<boundary.size();i++)
+    if (boundary[i].a.cartx()>=cutoff || boundary[i].b.cartx()>=cutoff)
+      newbdy.push_back(boundary[i]);
+  swap(boundary,newbdy);
+}
