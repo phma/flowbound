@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 {
   int i,j;
   init();
-  for (i=0;i<33;i++)
+  for (i=0;i<42;i++)
   {
     refine();
     prune();
