@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     prune();
   }
   for (i=0;i<boundary.size();i++)
-    cout<<toBase7(boundary[i].a.getx())<<','<<toBase7(boundary[i].a.gety())<<endl;
+    cout<<toBase7(boundary[i].a.cartx())<<','<<toBase7(boundary[i].a.carty())<<endl;
+  cout<<toBase7(boundary.back().b.cartx())<<','<<toBase7(boundary.back().b.carty())<<endl;
   return 0;
 }
