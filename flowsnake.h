@@ -7,6 +7,7 @@
  * Licensed under the Apache License, Version 2.0.
  */
 #include <vector>
+#include <string>
 #include "eisenstein.h"
 
 struct Segment
@@ -31,3 +32,4 @@ extern std::vector<Segment> boundary;
 void init();
 void refine();
 void prune();
+std::string toBase7(mpz_class n);

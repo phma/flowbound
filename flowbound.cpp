@@ -18,6 +18,6 @@ int main(int argc, char *argv[])
     prune();
   }
   for (i=0;i<boundary.size();i++)
-    cout<<boundary[i].a.getx()<<','<<boundary[i].a.gety()<<endl;
+    cout<<toBase7(boundary[i].a.getx())<<','<<toBase7(boundary[i].a.gety())<<endl;
   return 0;
 }

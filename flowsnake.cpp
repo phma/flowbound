@@ -59,3 +59,17 @@ void prune()
       newbdy.push_back(boundary[i]);
   swap(boundary,newbdy);
 }
+
+string toBase7(mpz_class n)
+{
+  int i;
+  mpz_class rem;
+  string ret;
+  while (n)
+  {
+    rem=n%7;
+    n/=7;
+    ret=(char)('0'+rem.get_si())+ret;
+  }
+  return ret;
+}
