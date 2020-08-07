@@ -16,7 +16,7 @@ vector<Segment> boundary;
 void init()
 {
   boundary.clear();
-  boundary.push_back(Segment(Eisenstein(0,-1),Eisenstein(1,1)));
+  boundary.push_back(Segment(Eisenstein(1,-1),Eisenstein(2,1)));
 }
 
 void refine()
