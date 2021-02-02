@@ -97,3 +97,48 @@ string toBase7(mpz_class n)
   }
   return ret;
 }
+
+int add343(int a,int b)
+{
+  int aDig[3],bDig[3],resDig[4];
+  int i,carry,res=0;
+  for (i=0;i<3;i++)
+  {
+    aDig[i]=a%7;
+    a/=7;
+    bDig[i]=b%7;
+    b/=7;
+    resDig[i]=0;
+  }
+  resDig[3]=0;
+  for (i=0;i<3;i++)
+  {
+    carry=0;
+    resDig[i]=aTable[7*aDig[i]+resDig[i]];
+    if (resDig[i]>6)
+    {
+      carry=resDig[i]/7;
+      resDig[i]%=7;
+    }
+    resDig[i]=aTable[7*bDig[i]+resDig[i]];
+    if (resDig[i]>6)
+    { // Adding three digits cannot produce more than a two-digit number.
+      carry=aTable[carry*7+resDig[i]/7];
+      resDig[i]%=7;
+    }
+    resDig[i+1]=carry;
+  }
+  for (i=3;i>=0;i--)
+    res=7*res+resDig[i];
+  return res;
+}
+
+void fillTables()
+{
+  int i,j;
+  for (i=0;i<343;i++)
+    for (j=0;j<343;j++)
+    {
+      additionTable.push_back(add343(i,j));
+    }
+}

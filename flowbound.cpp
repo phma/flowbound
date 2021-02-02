@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
 {
   int i,j;
   init();
+  fillTables();
   for (i=0;i<42;i++)
   {
     refine();
