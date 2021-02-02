@@ -3,7 +3,7 @@
 /* flowsnake.h - flowsnake                            */
 /*                                                    */
 /******************************************************/
-/* Copyright 2020 Pierre Abbat
+/* Copyright 2020,2021 Pierre Abbat
  * Licensed under the Apache License, Version 2.0.
  */
 #include <vector>
@@ -33,3 +33,13 @@ void init();
 void refine();
 void prune();
 std::string toBase7(mpz_class n);
+
+class FlowNumber
+/* Complex numbers are expressed in base 2-ω with seven digits, 0 and the
+ * sixth roots of 1, packed 11 to a limb.
+ */
+{
+private:
+  std::vector<uint32_t> limbs;
+  int exponent;
+};
