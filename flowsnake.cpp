@@ -16,7 +16,7 @@ vector<uint32_t> additionTable,multiplicationTable;
 /* In these tables, the digits 0 and 1 represent themselves, but 2 is 1+ω,
  * 3 is ω, and so around the circle.
  */
-char aTable[49]=
+char aTable[7][7]=
 {
   0,1,2,3,4,5,6,	// 0, 1, 2, 3, 4, 5, 6
   1,10,19,2,0,6,11,	// 1,13,25, 2, 0, 6,14
@@ -26,7 +26,7 @@ char aTable[49]=
   5,6,0,4,37,36,45,	// 5, 6, 0, 4,52,51,63
   6,11,1,0,5,45,44	// 6,14, 1, 0, 5,63,62
 };
-char mTable[49]=
+char mTable[7][7]=
 {
   0,0,0,0,0,0,0,
   0,1,2,3,4,5,6,
@@ -114,16 +114,16 @@ int add343(int a,int b)
   for (i=0;i<3;i++)
   {
     carry=0;
-    resDig[i]=aTable[7*aDig[i]+resDig[i]];
+    resDig[i]=aTable[aDig[i]][resDig[i]];
     if (resDig[i]>6)
     {
       carry=resDig[i]/7;
       resDig[i]%=7;
     }
-    resDig[i]=aTable[7*bDig[i]+resDig[i]];
+    resDig[i]=aTable[bDig[i]][resDig[i]];
     if (resDig[i]>6)
     { // Adding three digits cannot produce more than a two-digit number.
-      carry=aTable[carry*7+resDig[i]/7];
+      carry=aTable[carry][resDig[i]/7];
       resDig[i]%=7;
     }
     resDig[i+1]=carry;
