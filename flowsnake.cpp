@@ -133,6 +133,41 @@ int add343(int a,int b)
   return res;
 }
 
+int mul343(int a,int b)
+{
+  int aDig[3],bDig[3],prods[3][3],resDig[6];
+  int i,j,k,carry,res=0;
+  for (i=0;i<3;i++)
+  {
+    aDig[i]=a%7;
+    a/=7;
+    bDig[i]=b%7;
+    b/=7;
+    resDig[i]=resDig[i+3]=0;
+  }
+  for (i=0;i<3;i++)
+    for (j=0;j<3;j++)
+      prods[i][j]=mTable[aDig[i]][bDig[j]];
+  for (i=0;i<3;i++)
+  {
+    for (j=0;j<3;j++)
+    {
+      k=i+j;
+      resDig[k]=aTable[resDig[k]][prods[i][j]];
+      while (resDig[k]>=7)
+      {
+	carry=resDig[k]/7;
+	resDig[k]%=7;
+	k++;
+	resDig[k]=aTable[resDig[k]][carry];
+      }
+    }
+  }
+  for (i=5;i>=0;i--)
+    res=7*res+resDig[i];
+  return res;
+}
+
 void fillTables()
 {
   int i,j;
@@ -140,5 +175,8 @@ void fillTables()
     for (j=0;j<343;j++)
     {
       additionTable.push_back(add343(i,j));
+      multiplicationTable.push_back(mul343(i,j));
     }
+  additionTable.shrink_to_fit();
+  multiplicationTable.shrink_to_fit();
 }
