@@ -7,6 +7,7 @@
  * Licensed under the Apache License, Version 2.0.
  */
 #include <iostream>
+#include <cassert>
 #include "flowsnake.h"
 using namespace std;
 
@@ -213,4 +214,8 @@ void testTables()
     cout<<toBase7(mpz_class(i))<<' ';
   }
   cout<<'\n'<<realInts.size()<<" integers with up to three digits\n";
+  for (i=0;i<realInts.size();i++)
+    for (j=0;j<upOneInts.size();j++)
+      assert(limbToEisenstein(multiplicationTable[realInts[i]+343+upOneInts[j]])==
+	     limbToEisenstein(realInts[i])*limbToEisenstein(upOneInts[j]));
 }
