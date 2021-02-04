@@ -185,10 +185,16 @@ void fillTables()
 void testTables()
 {
   int i,j;
-  vector<int> realInts;
+  vector<int> realInts,upOneInts;
   for (i=270;i<343;i=additionTable[i*343+1])
   {
     realInts.push_back(i);
+    cout<<toBase7(mpz_class(i))<<' ';
+  }
+  cout<<'\n';
+  for (i=269;i<343;i=additionTable[i*343+1])
+  {
+    upOneInts.push_back(i);
     cout<<toBase7(mpz_class(i))<<' ';
   }
   cout<<'\n'<<realInts.size()<<" integers with up to three digits\n";
