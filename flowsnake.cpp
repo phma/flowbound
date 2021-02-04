@@ -169,6 +169,21 @@ int mul343(int a,int b)
   return res;
 }
 
+Eisenstein limbToEisenstein(uint32_t n)
+{
+  int i,dig;
+  Eisenstein ret,powBase=1;
+  while (n)
+  {
+    dig=n%7;
+    n/=7;
+    if (dig)
+      ret+=powBase*root1[dig-1];
+    powBase*=flowBase;
+  }
+  return ret;
+}
+
 void fillTables()
 {
   int i,j;
