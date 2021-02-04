@@ -3,7 +3,7 @@
 /* eisenstein.h - Eisenstein integers                 */
 /*                                                    */
 /******************************************************/
-/* Copyright 2020 Pierre Abbat
+/* Copyright 2020,2021 Pierre Abbat
  * Licensed under the Apache License, Version 2.0.
  */
 #ifndef EISENSTEIN_H
@@ -96,4 +96,6 @@ public:
   void inc(int n);
   bool cont(int n);
 };
+
+extern const Eisenstein root1[6];
 #endif
