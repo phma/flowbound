@@ -216,6 +216,6 @@ void testTables()
   cout<<'\n'<<realInts.size()<<" integers with up to three digits\n";
   for (i=0;i<realInts.size();i++)
     for (j=0;j<upOneInts.size();j++)
-      assert(limbToEisenstein(multiplicationTable[realInts[i]+343+upOneInts[j]])==
+      assert(limbToEisenstein(multiplicationTable[realInts[i]*343+upOneInts[j]])==
 	     limbToEisenstein(realInts[i])*limbToEisenstein(upOneInts[j]));
 }
