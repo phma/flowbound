@@ -8,6 +8,7 @@
  */
 #include <iostream>
 #include <cassert>
+#include <array>
 #include "flowsnake.h"
 using namespace std;
 
@@ -167,6 +168,44 @@ int mul343(int a,int b)
   }
   for (i=5;i>=0;i--)
     res=7*res+resDig[i];
+  return res;
+}
+
+array<uint32_t,2> addLimbs(uint32_t a,uint32_t b)
+{
+  int aDig[4],bDig[4],resDig[4];
+  int i,carry;
+  array<uint32_t,2> res;
+  for (i=0;i<4;i++)
+  {
+    aDig[i]=a%343;
+    bDig[i]=b%343;
+    a/=343;
+    b/=343;
+    resDig[i]=0;
+  }
+  for (i=0;i<4;i++)
+  {
+    carry=0;
+    resDig[i]=additionTable[aDig[i]*343+resDig[i]];
+    if (resDig[i]>342)
+    {
+      carry=resDig[i]/343;
+      resDig[i]%=343;
+    }
+    resDig[i]=additionTable[bDig[i]*343+resDig[i]];
+    if (resDig[i]>342)
+    { // Adding three digits cannot produce more than a two-digit number.
+      carry=additionTable[carry*343+resDig[i]/343];
+      resDig[i]%=343;
+    }
+    assert(carry<343);
+    resDig[i+1]=carry;
+  }
+  res[1]=resDig[3]/49;
+  resDig[3]%=49;
+  for (i=3;i>=0;i--)
+    res[0]=343*res[0]+resDig[i];
   return res;
 }
 
