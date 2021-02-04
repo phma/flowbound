@@ -34,6 +34,7 @@ void refine();
 void prune();
 std::string toBase7(mpz_class n);
 void fillTables();
+void testTables();
 
 class FlowNumber
 /* Complex numbers are expressed in base 2-ω with seven digits, 0 and the

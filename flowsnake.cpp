@@ -6,6 +6,7 @@
 /* Copyright 2020,2021 Pierre Abbat
  * Licensed under the Apache License, Version 2.0.
  */
+#include <iostream>
 #include "flowsnake.h"
 using namespace std;
 
@@ -89,7 +90,7 @@ string toBase7(mpz_class n)
   int i;
   mpz_class rem;
   string ret;
-  while (n)
+  while (n || ret.length()==0)
   {
     rem=n%7;
     n/=7;
@@ -179,4 +180,16 @@ void fillTables()
     }
   additionTable.shrink_to_fit();
   multiplicationTable.shrink_to_fit();
+}
+
+void testTables()
+{
+  int i,j;
+  vector<int> realInts;
+  for (i=270;i<343;i=additionTable[i*343+1])
+  {
+    realInts.push_back(i);
+    cout<<toBase7(mpz_class(i))<<' ';
+  }
+  cout<<'\n'<<realInts.size()<<" integers with up to three digits\n";
 }
