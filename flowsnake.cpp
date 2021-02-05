@@ -281,8 +281,9 @@ void fillTables()
 
 void testTables()
 {
-  int i,j;
+  int i,j,k;
   vector<int> realInts,upOneInts;
+  array<uint32_t,2> intRes,left,right;
   for (i=270;i<343;i=additionTable[i*343+1])
   {
     realInts.push_back(i);
@@ -299,4 +300,16 @@ void testTables()
     for (j=0;j<upOneInts.size();j++)
       assert(limbToEisenstein(multiplicationTable[realInts[i]*343+upOneInts[j]])==
 	     limbToEisenstein(realInts[i])*limbToEisenstein(upOneInts[j]));
+  // Test associativity of multiplication with intermediate results up to 7**11
+  for (i=0;i<16384;i+=381)
+    for (j=0;j<117649;j+=2736)
+      for (k=0;k<16807;k+=542)
+      {
+	intRes=mulLimbs(i,j);
+	left=mulLimbs(intRes[0],k);
+	intRes=mulLimbs(j,k);
+	right=mulLimbs(i,intRes[0]);
+	assert(left[0]==right[0]);
+	assert(left[1]==right[1]);
+      }
 }
