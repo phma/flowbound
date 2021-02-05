@@ -209,6 +209,48 @@ array<uint32_t,2> addLimbs(uint32_t a,uint32_t b)
   return res;
 }
 
+array<uint32_t,2> mulLimbs(uint32_t a,uint32_t b)
+{
+  int aDig[4],bDig[4],prods[4][4],resDig[8];
+  int i,j,k,carry;
+  array<uint32_t,2> res;
+  for (i=0;i<4;i++)
+  {
+    aDig[i]=a%343;
+    a/=343;
+    bDig[i]=b%343;
+    b/=343;
+    resDig[i]=resDig[i+4]=0;
+  }
+  for (i=0;i<4;i++)
+    for (j=0;j<4;j++)
+      prods[i][j]=multiplicationTable[aDig[i]*343+bDig[j]];
+  for (i=0;i<4;i++)
+  {
+    for (j=0;j<4;j++)
+    {
+      k=i+j;
+      resDig[k]=additionTable[resDig[k]*343+prods[i][j]];
+      while (resDig[k]>=343)
+      {
+	carry=resDig[k]/343;
+	resDig[k]%=343;
+	k++;
+	resDig[k]=additionTable[resDig[k]*343+carry];
+      }
+    }
+  }
+  res[1]=0;
+  assert(resDig[7]<7);
+  for (i=7;i>=4;i--) // 76665554443 33222111000
+    res[1]=343*res[1]+resDig[i];
+  res[1]=7*res[1]+resDig[3]/49;
+  res[0]=resDig[3]%49;
+  for (i=2;i>=0;i--)
+    res[0]=343*res[0]+resDig[i];
+  return res;
+}
+
 Eisenstein limbToEisenstein(uint32_t n)
 {
   int i,dig;
