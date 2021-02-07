@@ -212,7 +212,7 @@ array<uint32_t,2> addLimbs(uint32_t a,uint32_t b)
 array<uint32_t,2> mulLimbs(uint32_t a,uint32_t b)
 {
   int aDig[4],bDig[4],prods[4][4],resDig[8];
-  int i,j,k,carry;
+  int i,j,k,carry,carry2=0;
   array<uint32_t,2> res;
   for (i=0;i<4;i++)
   {
@@ -230,13 +230,15 @@ array<uint32_t,2> mulLimbs(uint32_t a,uint32_t b)
     for (j=0;j<4;j++)
     {
       k=i+j;
-      resDig[k]=additionTable[resDig[k]*343+prods[i][j]];
+      resDig[k]=additionTable[resDig[k]*343+prods[i][j]%343];
+      resDig[k+1]=additionTable[resDig[k+1]*343+prods[i][j]/343];
       while (resDig[k]>=343)
       {
-	carry=resDig[k]/343;
+	carry=additionTable[carry2*343+resDig[k]/343];
 	resDig[k]%=343;
 	k++;
-	resDig[k]=additionTable[resDig[k]*343+carry];
+	carry2=resDig[k]/343;
+	resDig[k]=additionTable[(resDig[k]%343)*343+carry];
       }
     }
   }
