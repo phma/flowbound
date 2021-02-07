@@ -44,6 +44,7 @@ class FlowNumber
 public:
   FlowNumber();
   FlowNumber(std::string a);
+  void normalize();
 private:
   std::vector<uint32_t> limbs;
   int exponent;

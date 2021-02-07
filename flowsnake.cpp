@@ -361,4 +361,21 @@ FlowNumber::FlowNumber(std::string a)
   }
   for (;i>point && (i-point-1)%11;i++)
     limbs[0]*=7;
+  normalize();
+}
+
+void FlowNumber::normalize()
+{
+  int i;
+  for (i=0;i<limbs.size() && limbs[i]==0;i++);
+  exponent+=i;
+  if (i)
+  {
+    memmove(&limbs[0],&limbs[1],sizeof(limbs[0])*(limbs.size()-i));
+    memset(&limbs[limbs.size()-i],0,sizeof(limbs[0])*i);
+  }
+  for (i=limbs.size()-1;i>=0 && limbs[i]==0;i--);
+  limbs.resize(i+1);
+  if (limbs.size()==0)
+    exponent=0;
 }
