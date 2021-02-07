@@ -11,6 +11,7 @@ using namespace std;
 int main(int argc, char *argv[])
 {
   int i,j;
+  FlowNumber a("261"),b("26.1"),c("2.61"),d(".261"),e("0.261");
   init();
   fillTables();
   testTables();

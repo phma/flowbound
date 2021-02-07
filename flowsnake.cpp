@@ -349,15 +349,15 @@ FlowNumber::FlowNumber(std::string a)
   if (point>a.length())
     point=a.length();
   limbs.resize((point+10)/11+(a.length()-point+9)/11);
-  exponent=-(a.length()-point+9)/11;
+  exponent=-((a.length()-point+9)/11);
   for (i=0;i<a.length();i++)
   {
     if (i<point)
       l=(point-i-1)/11-exponent;
     else
-      l=-(i-point-1)/11-exponent;
+      l=-((i-point-1)/11)-exponent-1;
     if (a[i]!='.')
-      limbs[i]=limbs[i]*7+a[i]-'0';
+      limbs[l]=limbs[l]*7+a[i]-'0';
   }
   for (;i>point && (i-point-1)%11;i++)
     limbs[0]*=7;
