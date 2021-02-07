@@ -232,7 +232,7 @@ array<uint32_t,2> mulLimbs(uint32_t a,uint32_t b)
       k=i+j;
       resDig[k]=additionTable[resDig[k]*343+prods[i][j]%343];
       resDig[k+1]=additionTable[resDig[k+1]*343+prods[i][j]/343];
-      while (resDig[k]>=343)
+      while (resDig[k]>=343 || resDig[k+1]>=343 || carry2)
       {
 	carry=additionTable[carry2*343+resDig[k]/343];
 	resDig[k]%=343;
