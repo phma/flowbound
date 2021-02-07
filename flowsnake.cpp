@@ -203,6 +203,7 @@ array<uint32_t,2> addLimbs(uint32_t a,uint32_t b)
     resDig[i+1]=carry;
   }
   res[1]=resDig[3]/49;
+  res[0]=0;
   resDig[3]%=49;
   for (i=3;i>=0;i--)
     res[0]=343*res[0]+resDig[i];
@@ -316,6 +317,18 @@ void testTables()
 	left=mulLimbs(intRes[0],k);
 	intRes=mulLimbs(j,k);
 	right=mulLimbs(i,intRes[0]);
+	assert(left[0]==right[0]);
+	assert(left[1]==right[1]);
+      }
+  // Test associativity of addition
+  for (i=0;i<282475249;i+=1478928)
+    for (j=0;j<282475249;j+=1870697)
+      for (k=0;k<282475249;k+=1578074)
+      {
+	intRes=addLimbs(i,j);
+	left=addLimbs(intRes[0],k);
+	intRes=addLimbs(j,k);
+	right=addLimbs(i,intRes[0]);
 	assert(left[0]==right[0]);
 	assert(left[1]==right[1]);
       }
