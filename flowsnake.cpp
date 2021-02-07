@@ -301,6 +301,7 @@ void testTables()
       assert(limbToEisenstein(multiplicationTable[realInts[i]*343+upOneInts[j]])==
 	     limbToEisenstein(realInts[i])*limbToEisenstein(upOneInts[j]));
   // Test associativity of multiplication with intermediate results up to 7**11
+  mulLimbs(5472,15718);
   for (i=0;i<16384;i+=381)
     for (j=0;j<117649;j+=2736)
       for (k=0;k<16807;k+=542)
