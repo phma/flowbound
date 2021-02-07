@@ -41,6 +41,9 @@ class FlowNumber
  * sixth roots of 1, packed 11 to a limb.
  */
 {
+public:
+  FlowNumber();
+  FlowNumber(std::string a);
 private:
   std::vector<uint32_t> limbs;
   int exponent;

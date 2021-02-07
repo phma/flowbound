@@ -333,3 +333,32 @@ void testTables()
 	assert(left[1]==right[1]);
       }
 }
+
+FlowNumber::FlowNumber()
+{
+  exponent=0;
+}
+
+FlowNumber::FlowNumber(std::string a)
+{
+  size_t i,l;
+  size_t len=a.find_first_not_of("0123456.");
+  if (len<a.length())
+    a.erase(len);
+  size_t point=a.find('.');
+  if (point>a.length())
+    point=a.length();
+  limbs.resize((point+10)/11+(a.length()-point+9)/11);
+  exponent=-(a.length()-point+9)/11;
+  for (i=0;i<a.length();i++)
+  {
+    if (i<point)
+      l=(point-i-1)/11-exponent;
+    else
+      l=-(i-point-1)/11-exponent;
+    if (a[i]!='.')
+      limbs[i]=limbs[i]*7+a[i]-'0';
+  }
+  for (;i>point && (i-point-1)%11;i++)
+    limbs[0]*=7;
+}
