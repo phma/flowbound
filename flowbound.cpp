@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
   FlowNumber a("261"),b("26.1"),c("2.61"),d(".261"),e("0.261"),f("0000000000002.61000000000000");
   init();
   fillTables();
-  testTables();
+  //testTables();
   for (i=0;i<42;i++)
   {
     refine();
