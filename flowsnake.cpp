@@ -186,7 +186,7 @@ uint32_t negateLimb(uint32_t a)
     else
       ;
     ret=7*ret+a/pow7[10];
-    a=7*(ret%pow7[10]);
+    a=7*(a%pow7[10]);
   }
   return ret;
 }
