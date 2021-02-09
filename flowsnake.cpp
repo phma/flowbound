@@ -415,7 +415,7 @@ FlowNumber operator+(const FlowNumber &l,const FlowNumber &r)
   ret.limbs.resize(highExp-ret.exponent);
   for (i=ret.exponent;i<highExp;i++)
   {
-    if (i>=l.exponent && i<l.exponent+l.limbs.size())
+    if (i>=l.exponent && i<(signed)(l.exponent+l.limbs.size()))
     {
       resLimb=addLimbs(ret.limbs[i-ret.exponent],l.limbs[i-l.exponent]);
       ret.limbs[i-ret.exponent]=resLimb[0];
@@ -427,7 +427,7 @@ FlowNumber operator+(const FlowNumber &l,const FlowNumber &r)
 	ret.limbs[j-ret.exponent]=resLimb[0];
       }
     }
-    if (i>=r.exponent && i<r.exponent+r.limbs.size())
+    if (i>=r.exponent && i<(signed)(r.exponent+r.limbs.size()))
     {
       resLimb=addLimbs(ret.limbs[i-ret.exponent],r.limbs[i-r.exponent]);
       ret.limbs[i-ret.exponent]=resLimb[0];
