@@ -44,6 +44,7 @@ class FlowNumber
 public:
   FlowNumber();
   FlowNumber(std::string a);
+  std::string toString();
   void normalize();
 private:
   std::vector<uint32_t> limbs;

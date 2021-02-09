@@ -39,6 +39,7 @@ char mTable[7][7]=
   0,5,6,1,2,3,4,
   0,6,1,2,3,4,5
 };
+int pow7[]={1,7,49,343,2401,16807,117649,823543,5764801,40353607,282475249,1977326743};
 
 void init()
 {
@@ -362,6 +363,30 @@ FlowNumber::FlowNumber(std::string a)
   for (;i>point && (i-point-1)%11;i++)
     limbs[0]*=7;
   normalize();
+}
+
+string FlowNumber::toString()
+{
+  int i,j;
+  string ret;
+  for (i=limbs.size()-1;i>=0;i--)
+    for (j=10;j>=0;j--)
+      ret+=(char)'0'+(limbs[i]/pow7[j])%7;
+  for (i=0;i<exponent;i++)
+    ret+="00000000000";
+  while (ret.length()/11+exponent<0)
+    ret="00000000000"+ret;
+  if (exponent>=0)
+    ret+='.';
+  else
+    ret.insert(ret.length()+11*exponent,".");
+  ret.erase(0,ret.find_first_not_of('0'));
+  ret.erase(ret.find_last_not_of('0')+1);
+  if (ret[0]=='.')
+    ret="0"+ret;
+  if (ret[ret.length()-1]=='.')
+    ret.erase(ret.length()-1);
+  return ret;
 }
 
 void FlowNumber::normalize()
