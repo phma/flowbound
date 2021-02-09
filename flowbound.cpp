@@ -30,5 +30,6 @@ int main(int argc, char *argv[])
   cout<<d.toString()<<endl;
   cout<<e.toString()<<endl;
   cout<<f.toString()<<endl;
+  cout<<(a+e).toString()<<endl;
   return 0;
 }

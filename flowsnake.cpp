@@ -404,3 +404,42 @@ void FlowNumber::normalize()
   if (limbs.size()==0)
     exponent=0;
 }
+
+FlowNumber operator+(const FlowNumber &l,const FlowNumber &r)
+{
+  int highExp,i,j;
+  FlowNumber ret;
+  array<uint32_t,2> resLimb;
+  ret.exponent=min(l.exponent,r.exponent);
+  highExp=max(l.exponent+l.limbs.size(),r.exponent+r.limbs.size())+1;
+  ret.limbs.resize(highExp-ret.exponent);
+  for (i=ret.exponent;i<highExp;i++)
+  {
+    if (i>=l.exponent && i<l.exponent+l.limbs.size())
+    {
+      resLimb=addLimbs(ret.limbs[i-ret.exponent],l.limbs[i-l.exponent]);
+      ret.limbs[i-ret.exponent]=resLimb[0];
+      j=i;
+      while (resLimb[1])
+      {
+	j++;
+	resLimb=addLimbs(resLimb[1],ret.limbs[j-ret.exponent]);
+	ret.limbs[j-ret.exponent]=resLimb[0];
+      }
+    }
+    if (i>=r.exponent && i<r.exponent+r.limbs.size())
+    {
+      resLimb=addLimbs(ret.limbs[i-ret.exponent],r.limbs[i-r.exponent]);
+      ret.limbs[i-ret.exponent]=resLimb[0];
+      j=i;
+      while (resLimb[1])
+      {
+	j++;
+	resLimb=addLimbs(resLimb[1],ret.limbs[j-ret.exponent]);
+	ret.limbs[j-ret.exponent]=resLimb[0];
+      }
+    }
+  }
+  ret.normalize();
+  return ret;
+}
