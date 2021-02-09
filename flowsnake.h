@@ -50,4 +50,5 @@ private:
   std::vector<uint32_t> limbs;
   int exponent;
   friend FlowNumber operator+(const FlowNumber &l,const FlowNumber &r);
+  friend FlowNumber operator-(const FlowNumber &l,const FlowNumber &r);
 };
