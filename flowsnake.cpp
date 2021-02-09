@@ -172,6 +172,25 @@ int mul343(int a,int b)
   return res;
 }
 
+uint32_t negateLimb(uint32_t a)
+{
+  int i;
+  uint32_t ret=0;
+  for (i=0;i<11;i++)
+  {
+    if (a>=pow7[10])
+      if (a>=4*pow7[10])
+	a-=3*pow7[10];
+      else
+	a+=3*pow7[10];
+    else
+      ;
+    ret=7*ret+a/pow7[10];
+    a=7*(ret%pow7[10]);
+  }
+  return ret;
+}
+
 array<uint32_t,2> addLimbs(uint32_t a,uint32_t b)
 {
   int aDig[4],bDig[4],resDig[4];
