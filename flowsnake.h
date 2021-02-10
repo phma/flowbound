@@ -51,4 +51,5 @@ private:
   int exponent;
   friend FlowNumber operator+(const FlowNumber &l,const FlowNumber &r);
   friend FlowNumber operator-(const FlowNumber &l,const FlowNumber &r);
+  friend FlowNumber operator*(const FlowNumber &l,const FlowNumber &r);
 };

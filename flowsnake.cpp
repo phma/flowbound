@@ -501,3 +501,37 @@ FlowNumber operator-(const FlowNumber &l,const FlowNumber &r)
   ret.normalize();
   return ret;
 }
+
+FlowNumber operator*(const FlowNumber &l,const FlowNumber &r)
+{
+  int i,j,k;
+  FlowNumber ret;
+  array<uint32_t,2> resLimb,prodLimb;
+  ret.exponent=l.exponent+r.exponent;
+  ret.limbs.resize(l.limbs.size()+r.limbs.size());
+  for (i=0;i<l.limbs.size();i++)
+    for (j=0;j<r.limbs.size();j++)
+    {
+      prodLimb=mulLimbs(l.limbs[i],r.limbs[j]);
+      k=i+j;
+      resLimb=addLimbs(prodLimb[0],ret.limbs[k]);
+      ret.limbs[k]=resLimb[0];
+      while (resLimb[1])
+      {
+	k++;
+	resLimb=addLimbs(resLimb[1],ret.limbs[k]);
+	ret.limbs[k]=resLimb[0];
+      }
+      k=i+j+1;
+      resLimb=addLimbs(prodLimb[1],ret.limbs[k]);
+      ret.limbs[k]=resLimb[0];
+      while (resLimb[1])
+      {
+	k++;
+	resLimb=addLimbs(resLimb[1],ret.limbs[k]);
+	ret.limbs[k]=resLimb[0];
+      }
+    }
+  ret.normalize();
+  return ret;
+}

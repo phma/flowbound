@@ -32,5 +32,6 @@ int main(int argc, char *argv[])
   cout<<f.toString()<<endl;
   cout<<(a+e).toString()<<endl;
   cout<<(a-e).toString()<<endl;
+  cout<<(a*e).toString()<<endl;
   return 0;
 }
