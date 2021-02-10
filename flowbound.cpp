@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
 {
   int i,j;
   FlowNumber a("261"),b("26.1"),c("2.61"),d(".261"),e("0.261"),f("0000000000002.61000000000000");
+  FlowNumber p("14"),rp(".1111111111111111111111");
   init();
   fillTables();
   //testTables();
@@ -33,5 +34,6 @@ int main(int argc, char *argv[])
   cout<<(a+e).toString()<<endl;
   cout<<(a-e).toString()<<endl;
   cout<<(a*e).toString()<<endl;
+  cout<<(p*rp).toString()<<endl;
   return 0;
 }
