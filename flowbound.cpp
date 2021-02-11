@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
   int i,j;
   FlowNumber a("261"),b("26.1"),c("2.61"),d(".261"),e("0.261"),f("0000000000002.61000000000000");
   FlowNumber p("14"),rp(".1111111111111111111111");
-  FlowNumber I("2.3432");
+  FlowNumber imag;
   init();
   fillTables();
   //testTables();
@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
     cout<<toBase9(boundary[i].l)<<endl;
   }
   cout<<toBase7(boundary.back().b.cartx())<<','<<toBase7(boundary.back().b.carty())<<endl;
+  imag=complexToFlowNumber(complex<double>(0,1));
   cout<<a.toString()<<' '<<(complex<double>)a<<endl;
   cout<<b.toString()<<' '<<(complex<double>)b<<endl;
   cout<<c.toString()<<' '<<(complex<double>)c<<endl;
@@ -39,7 +40,7 @@ int main(int argc, char *argv[])
   cout<<(a-e).toString()<<' '<<(complex<double>)(a-e)<<endl;
   cout<<(a*e).toString()<<' '<<(complex<double>)(a*e)<<endl;
   cout<<(p*rp).toString()<<' '<<(complex<double>)(p*rp)<<endl;
-  cout<<(I).toString()<<' '<<(complex<double>)(I)<<endl;
-  cout<<(I*I).toString()<<' '<<(complex<double>)(I*I)<<endl;
+  cout<<(imag).toString()<<' '<<(complex<double>)(imag)<<endl;
+  cout<<(imag*imag).toString()<<' '<<(complex<double>)(imag*imag)<<endl;
   return 0;
 }

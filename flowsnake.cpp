@@ -15,6 +15,7 @@ using namespace std;
 const Eisenstein flowBase(2,-1);
 const Eisenstein flowBaseConj(3,1);
 const Eisenstein limbBase(-25539,25807);
+const FlowNumber flowOne("1"),deg60("2");
 vector<Segment> boundary;
 vector<uint32_t> additionTable,multiplicationTable,negationTable;
 /* In these tables, the digits 0 and 1 represent themselves, but 2 is 1+ω,
@@ -588,9 +589,39 @@ FlowNumber operator<<(const FlowNumber &l,int n)
 
 FlowNumber complexToFlowNumber(complex<double> z)
 {
-  int i=0;
+  int i,n,j,xp=0,sz;
+  bool stop=false;
+  FlowNumber inc;
   vector<FlowNumber> approx;
+  vector<double> diff;
   if (z!=0.)
-    i=lrint(log(norm(z))/log(7))+1;
+    xp=lrint(log(norm(z))/log(7))+2;
+  n=xp;
   approx.push_back(FlowNumber());
+  diff.push_back(abs((complex<double>)approx[0]-z));
+  while (!stop)
+  {
+    inc=flowOne<<xp;
+    sz=approx.size();
+    for (i=0;i<sz;i++)
+      for (j=0;j<6;j++)
+      {
+	approx.push_back(approx[i]+inc);
+	diff.push_back(abs((complex<double>)approx.back()-z));
+	inc=inc*deg60;
+      }
+    for (i=0;i<approx.size();i++)
+      for (j=i-1;j>=0;j--)
+	if (diff[j]>diff[j+1])
+	{
+	  swap(diff[j],diff[j+1]);
+	  swap(approx[j],approx[j+1]);
+	}
+    if (diff[0]==0 || n-xp>44)
+      stop=true;
+    diff.resize(4);
+    approx.resize(4);
+    xp--;
+  }
+  return approx[0];
 }
