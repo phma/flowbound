@@ -15,11 +15,11 @@ using namespace std;
 const Eisenstein flowBase(2,-1);
 const Eisenstein flowBaseConj(3,1);
 vector<Segment> boundary;
-vector<uint32_t> additionTable,multiplicationTable;
+vector<uint32_t> additionTable,multiplicationTable,negationTable;
 /* In these tables, the digits 0 and 1 represent themselves, but 2 is 1+ω,
  * 3 is ω, and so around the circle.
  */
-char aTable[7][7]=
+const char aTable[7][7]=
 {
   0,1,2,3,4,5,6,	// 0, 1, 2, 3, 4, 5, 6
   1,10,19,2,0,6,11,	// 1,13,25, 2, 0, 6,14
@@ -29,7 +29,7 @@ char aTable[7][7]=
   5,6,0,4,37,36,45,	// 5, 6, 0, 4,52,51,63
   6,11,1,0,5,45,44	// 6,14, 1, 0, 5,63,62
 };
-char mTable[7][7]=
+const char mTable[7][7]=
 {
   0,0,0,0,0,0,0,
   0,1,2,3,4,5,6,
@@ -39,7 +39,7 @@ char mTable[7][7]=
   0,5,6,1,2,3,4,
   0,6,1,2,3,4,5
 };
-int pow7[]={1,7,49,343,2401,16807,117649,823543,5764801,40353607,282475249,1977326743};
+const int pow7[]={1,7,49,343,2401,16807,117649,823543,5764801,40353607,282475249,1977326743};
 
 void init()
 {
@@ -307,7 +307,7 @@ Eisenstein limbToEisenstein(uint32_t n)
 
 void fillTables()
 {
-  int i,j;
+  int i,j,neg,pos;
   for (i=0;i<343;i++)
     for (j=0;j<343;j++)
     {
@@ -316,6 +316,19 @@ void fillTables()
     }
   additionTable.shrink_to_fit();
   multiplicationTable.shrink_to_fit();
+  for (i=0;i<pow7[6];i++)
+  {
+    for (neg=j=0,pos=i;j<6;j++)
+    {
+      neg*=7;
+      if (pos>=pow7[5] && pos<pow7[5]*4)
+	neg+=pos/pow7[5]+3;
+      if (pos>=pow7[5]*4)
+	neg+=pos/pow7[5]-3;
+      pos=(pos%pow7[5])*7;
+    }
+    negationTable.push_back(neg);
+  }
 }
 
 void testTables()
