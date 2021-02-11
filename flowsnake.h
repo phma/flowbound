@@ -13,10 +13,12 @@
 struct Segment
 {
   Eisenstein a,b;
-  Segment(Eisenstein beg,Eisenstein end)
+  mpz_class l;
+  Segment(Eisenstein beg,Eisenstein end,mpz_class along)
   {
     a=beg;
     b=end;
+    l=along;
   }
   Segment()
   {
@@ -33,6 +35,7 @@ void init();
 void refine();
 void prune();
 std::string toBase7(mpz_class n);
+std::string toBase9(mpz_class n);
 void fillTables();
 void testTables();
 

@@ -44,7 +44,7 @@ int pow7[]={1,7,49,343,2401,16807,117649,823543,5764801,40353607,282475249,19773
 void init()
 {
   boundary.clear();
-  boundary.push_back(Segment(Eisenstein(1,-1),Eisenstein(2,1)));
+  boundary.push_back(Segment(Eisenstein(1,-1),Eisenstein(2,1),0));
 }
 
 void refine()
@@ -52,6 +52,7 @@ void refine()
   vector<Segment> newbdy;
   int i;
   Eisenstein diff,p0,p1,p2,p3;
+  mpz_class along;
   for (i=0;i<boundary.size();i++)
   {
     diff=(boundary[i].b-boundary[i].a)*flowBaseConj;
@@ -59,9 +60,10 @@ void refine()
     p3=boundary[i].b*7;
     p1=p0+diff;
     p2=p3-diff;
-    newbdy.push_back(Segment(p0,p1));
-    newbdy.push_back(Segment(p1,p2));
-    newbdy.push_back(Segment(p2,p3));
+    along=boundary[i].l*3;
+    newbdy.push_back(Segment(p0,p1,along));
+    newbdy.push_back(Segment(p1,p2,along+1));
+    newbdy.push_back(Segment(p2,p3,along+2));
   }
   swap(boundary,newbdy);
 }
@@ -97,6 +99,20 @@ string toBase7(mpz_class n)
   {
     rem=n%7;
     n/=7;
+    ret=(char)('0'+rem.get_si())+ret;
+  }
+  return ret;
+}
+
+string toBase9(mpz_class n)
+{
+  int i;
+  mpz_class rem;
+  string ret;
+  while (n || ret.length()==0)
+  {
+    rem=n%9;
+    n/=9;
     ret=(char)('0'+rem.get_si())+ret;
   }
   return ret;

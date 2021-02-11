@@ -23,7 +23,10 @@ int main(int argc, char *argv[])
     cout<<i<<' '<<boundary.size()<<endl;
   }
   for (i=0;i<boundary.size();i++)
+  {
     cout<<toBase7(boundary[i].a.cartx())<<','<<toBase7(boundary[i].a.carty())<<endl;
+    cout<<toBase9(boundary[i].l)<<endl;
+  }
   cout<<toBase7(boundary.back().b.cartx())<<','<<toBase7(boundary.back().b.carty())<<endl;
   cout<<a.toString()<<endl;
   cout<<b.toString()<<endl;
