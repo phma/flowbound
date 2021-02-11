@@ -567,6 +567,25 @@ FlowNumber operator*(const FlowNumber &l,const FlowNumber &r)
   return ret;
 }
 
+FlowNumber operator<<(const FlowNumber &l,int n)
+{
+  FlowNumber ret;
+  int limbShift,digShift,i;
+  digShift=n%11;
+  if (digShift<0)
+    digShift+=11;
+  limbShift=(n-digShift)/11;
+  ret.limbs.resize(l.limbs.size()+1);
+  for (i=0;i<l.limbs.size();i++)
+  {
+    ret.limbs[i]+=(l.limbs[i]%pow7[11-digShift])*pow7[digShift];
+    ret.limbs[i+1]+=(l.limbs[i]/pow7[11-digShift]);
+  }
+  ret.exponent=l.exponent+limbShift;
+  ret.normalize();
+  return ret;
+}
+
 FlowNumber complexToFlowNumber(complex<double> z)
 {
   int i=0;

@@ -58,6 +58,7 @@ private:
   friend FlowNumber operator+(const FlowNumber &l,const FlowNumber &r);
   friend FlowNumber operator-(const FlowNumber &l,const FlowNumber &r);
   friend FlowNumber operator*(const FlowNumber &l,const FlowNumber &r);
+  friend FlowNumber operator<<(const FlowNumber &l,int n);
 };
 
 FlowNumber complexToFlowNumber(std::complex<double> z);
