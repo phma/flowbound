@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
   FlowNumber a("261"),b("26.1"),c("2.61"),d(".261"),e("0.261"),f("0000000000002.61000000000000");
   FlowNumber g("200000000000"),h(".000000000001");
   FlowNumber p("14"),rp(".1111111111111111111111");
-  FlowNumber imag;
+  FlowNumber imag,half;
   init();
   fillTables();
   //testTables();
@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
   }
   cout<<toBase7(boundary.back().b.cartx())<<','<<toBase7(boundary.back().b.carty())<<endl;
   imag=complexToFlowNumber(complex<double>(0,1));
+  half=complexToFlowNumber(complex<double>(0.5,0));
   cout<<a.toString()<<' '<<(complex<double>)a<<endl;
   cout<<b.toString()<<' '<<(complex<double>)b<<endl;
   cout<<c.toString()<<' '<<(complex<double>)c<<endl;
@@ -44,5 +45,6 @@ int main(int argc, char *argv[])
   cout<<(p*rp).toString()<<' '<<(complex<double>)(p*rp)<<endl;
   cout<<(imag).toString()<<' '<<(complex<double>)(imag)<<endl;
   cout<<(imag*imag).toString()<<' '<<(complex<double>)(imag*imag)<<endl;
+  cout<<(half).toString()<<' '<<(complex<double>)(half)<<endl;
   return 0;
 }
