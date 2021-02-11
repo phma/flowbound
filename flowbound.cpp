@@ -28,15 +28,15 @@ int main(int argc, char *argv[])
     cout<<toBase9(boundary[i].l)<<endl;
   }
   cout<<toBase7(boundary.back().b.cartx())<<','<<toBase7(boundary.back().b.carty())<<endl;
-  cout<<a.toString()<<endl;
-  cout<<b.toString()<<endl;
-  cout<<c.toString()<<endl;
-  cout<<d.toString()<<endl;
-  cout<<e.toString()<<endl;
-  cout<<f.toString()<<endl;
-  cout<<(a+e).toString()<<endl;
-  cout<<(a-e).toString()<<endl;
-  cout<<(a*e).toString()<<endl;
-  cout<<(p*rp).toString()<<endl;
+  cout<<a.toString()<<' '<<(complex<double>)a<<endl;
+  cout<<b.toString()<<' '<<(complex<double>)b<<endl;
+  cout<<c.toString()<<' '<<(complex<double>)c<<endl;
+  cout<<d.toString()<<' '<<(complex<double>)d<<endl;
+  cout<<e.toString()<<' '<<(complex<double>)e<<endl;
+  cout<<f.toString()<<' '<<(complex<double>)f<<endl;
+  cout<<(a+e).toString()<<' '<<(complex<double>)(a+e)<<endl;
+  cout<<(a-e).toString()<<' '<<(complex<double>)(a-e)<<endl;
+  cout<<(a*e).toString()<<' '<<(complex<double>)(a*e)<<endl;
+  cout<<(p*rp).toString()<<' '<<(complex<double>)(p*rp)<<endl;
   return 0;
 }

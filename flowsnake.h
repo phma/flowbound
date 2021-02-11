@@ -10,6 +10,8 @@
 #include <string>
 #include "eisenstein.h"
 
+extern const Eisenstein flowBase;
+
 struct Segment
 {
   Eisenstein a,b;
@@ -49,6 +51,7 @@ public:
   FlowNumber(std::string a);
   std::string toString();
   void normalize();
+  operator std::complex<double>() const;
 private:
   std::vector<uint32_t> limbs;
   int exponent;

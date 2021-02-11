@@ -14,6 +14,7 @@ using namespace std;
 
 const Eisenstein flowBase(2,-1);
 const Eisenstein flowBaseConj(3,1);
+const Eisenstein limbBase(-25539,25807);
 vector<Segment> boundary;
 vector<uint32_t> additionTable,multiplicationTable,negationTable;
 /* In these tables, the digits 0 and 1 represent themselves, but 2 is 1+ω,
@@ -443,6 +444,15 @@ void FlowNumber::normalize()
   limbs.resize(i+1);
   if (limbs.size()==0)
     exponent=0;
+}
+
+FlowNumber::operator complex<double>() const
+{
+  int i;
+  Eisenstein acc;
+  for (i=limbs.size()-1;i>=0;i--)
+    acc=acc*limbBase+limbToEisenstein(limbs[i]);
+  return (complex<double>)acc*pow((complex<double>)limbBase,exponent);
 }
 
 FlowNumber operator+(const FlowNumber &l,const FlowNumber &r)
