@@ -1,4 +1,4 @@
-/* Copyright 2020 Pierre Abbat
+/* Copyright 2020,2021 Pierre Abbat
  * Licensed under the Apache License, Version 2.0.
  */
 #include <iostream>
