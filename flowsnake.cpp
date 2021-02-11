@@ -190,20 +190,11 @@ int mul343(int a,int b)
 
 uint32_t negateLimb(uint32_t a)
 {
-  int i;
+  uint32_t hi,lo;
   uint32_t ret=0;
-  for (i=0;i<11;i++)
-  {
-    if (a>=pow7[10])
-      if (a>=4*pow7[10])
-	a-=3*pow7[10];
-      else
-	a+=3*pow7[10];
-    else
-      ;
-    ret=7*ret+a/pow7[10];
-    a=7*(a%pow7[10]);
-  }
+  hi=a/pow7[6];
+  lo=a%pow7[6];
+  ret=negationTable[hi]*pow7[6]+negationTable[lo];
   return ret;
 }
 
