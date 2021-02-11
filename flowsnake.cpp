@@ -320,6 +320,7 @@ void fillTables()
     }
     negationTable.push_back(neg);
   }
+  negationTable.shrink_to_fit();
 }
 
 void testTables()
