@@ -462,7 +462,7 @@ FlowNumber operator+(const FlowNumber &l,const FlowNumber &r)
   FlowNumber ret;
   array<uint32_t,2> resLimb;
   ret.exponent=min(l.exponent,r.exponent);
-  highExp=max(l.exponent+l.limbs.size(),r.exponent+r.limbs.size())+1;
+  highExp=max((signed)(l.exponent+l.limbs.size()),(signed)(r.exponent+r.limbs.size()))+1;
   ret.limbs.resize(highExp-ret.exponent);
   for (i=ret.exponent;i<highExp;i++)
   {
@@ -501,7 +501,7 @@ FlowNumber operator-(const FlowNumber &l,const FlowNumber &r)
   FlowNumber ret;
   array<uint32_t,2> resLimb;
   ret.exponent=min(l.exponent,r.exponent);
-  highExp=max(l.exponent+l.limbs.size(),r.exponent+r.limbs.size())+1;
+  highExp=max((signed)(l.exponent+l.limbs.size()),(signed)(r.exponent+r.limbs.size()))+1;
   ret.limbs.resize(highExp-ret.exponent);
   for (i=ret.exponent;i<highExp;i++)
   {
