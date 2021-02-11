@@ -17,12 +17,12 @@ int main(int argc, char *argv[])
   init();
   fillTables();
   //testTables();
-  /*for (i=0;i<42;i++)
+  for (i=0;i<42;i++)
   {
     refine();
     prune();
     cout<<i<<' '<<boundary.size()<<endl;
-  }*/
+  }
   for (i=0;i<boundary.size();i++)
   {
     cout<<toBase7(boundary[i].a.cartx())<<','<<toBase7(boundary[i].a.carty())<<endl;

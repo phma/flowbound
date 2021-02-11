@@ -566,3 +566,12 @@ FlowNumber operator*(const FlowNumber &l,const FlowNumber &r)
   ret.normalize();
   return ret;
 }
+
+FlowNumber complexToFlowNumber(complex<double> z)
+{
+  int i=0;
+  vector<FlowNumber> approx;
+  if (z!=0.)
+    i=lrint(log(norm(z))/log(7))+1;
+  approx.push_back(FlowNumber());
+}
