@@ -91,7 +91,7 @@ public:
   }
   operator std::complex<double>() const
   {
-    return std::complex<double>((x.get_d()-y.get_d())/2.,y.get_d()*M_SQRT_3_4);
+    return std::complex<double>((x.get_d()-y.get_d()/2.),y.get_d()*M_SQRT_3_4);
   }
   void inc(int n);
   bool cont(int n);
