@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
   FlowNumber a("261"),b("26.1"),c("2.61"),d(".261"),e("0.261"),f("0000000000002.61000000000000");
   FlowNumber g("200000000000"),h(".000000000001");
   FlowNumber p("14"),rp(".1111111111111111111111");
-  FlowNumber imag,half,frac;
+  FlowNumber imag,half,frac,east;
   init();
   fillTables();
   //testTables();
@@ -33,6 +33,10 @@ int main(int argc, char *argv[])
   imag=complexToFlowNumber(complex<double>(0,1));
   half=complexToFlowNumber(complex<double>(0.5,0));
   frac=complexToFlowNumber(complex<double>(1/8.,0));
+  east=complexToFlowNumber(complex<double>(.5749186263504634,.07052452345448619));
+  /* east is 1/3 what's output by the above, because init sets the segment ends
+   * to Eisenstein integers which are 3 times the corners of the boundary.
+   */
   cout<<a.toString()<<' '<<(complex<double>)a<<endl;
   cout<<b.toString()<<' '<<(complex<double>)b<<endl;
   cout<<c.toString()<<' '<<(complex<double>)c<<endl;
@@ -48,5 +52,6 @@ int main(int argc, char *argv[])
   cout<<(imag*imag).toString()<<' '<<(complex<double>)(imag*imag)<<endl;
   cout<<(half).toString()<<' '<<(complex<double>)(half)<<endl;
   cout<<(frac).toString()<<' '<<(complex<double>)(frac)<<endl;
+  cout<<(east).toString()<<' '<<(complex<double>)(east)<<endl;
   return 0;
 }
