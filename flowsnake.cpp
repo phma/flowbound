@@ -456,6 +456,43 @@ FlowNumber::operator complex<double>() const
   return (complex<double>)acc*pow((complex<double>)limbBase,exponent);
 }
 
+array<int,2> FlowNumber::msd()
+/* Returns the most significant digit in [0] and its position in [1].
+ * Position is relative to exponent; e.g. if passed 0.00012350000, it returns
+ * 7, not -4.
+ */
+{
+  array<int,2> ret;
+  if (limbs.size())
+  {
+    ret[0]=limbs.back();
+    ret[1]=(limbs.size()-1)*11;
+    if (ret[0]>=pow7[8])
+    {
+      ret[0]/=pow7[8];
+      ret[1]+=8;
+    }
+    if (ret[0]>=pow7[4])
+    {
+      ret[0]/=pow7[4];
+      ret[1]+=4;
+    }
+    if (ret[0]>=pow7[2])
+    {
+      ret[0]/=pow7[2];
+      ret[1]+=2;
+    }
+    if (ret[0]>=pow7[1])
+    {
+      ret[0]/=pow7[1];
+      ret[1]+=1;
+    }
+  }
+  else
+    ret[0]=ret[1]=0;
+  return ret;
+}
+
 FlowNumber operator+(const FlowNumber &l,const FlowNumber &r)
 {
   int highExp,i,j;

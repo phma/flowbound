@@ -8,6 +8,7 @@
  */
 #include <vector>
 #include <string>
+#include <array>
 #include "eisenstein.h"
 
 extern const Eisenstein flowBase;
@@ -52,6 +53,7 @@ public:
   std::string toString();
   void normalize();
   operator std::complex<double>() const;
+  std::array<int,2> msd();
 private:
   std::vector<uint32_t> limbs;
   int exponent;
