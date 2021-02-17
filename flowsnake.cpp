@@ -407,6 +407,20 @@ FlowNumber::FlowNumber(std::string a)
   normalize();
 }
 
+int FlowNumber::precision=44;
+bool FlowNumber::precType=false;
+
+void FlowNumber::setPrecision(int p,bool t)
+/* If t, p is the number of significant digits in the result of division.
+ * If !t, p is the number of digits after the radix point.
+ */
+{
+  if (t && p<0)
+    p=0;
+  precision=p;
+  precType=t;
+}
+
 string FlowNumber::toString()
 {
   int i,j;

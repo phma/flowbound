@@ -50,11 +50,14 @@ class FlowNumber
 public:
   FlowNumber();
   FlowNumber(std::string a);
+  void setPrecision(int p,bool t); // t is true for relative
   std::string toString();
   void normalize();
   operator std::complex<double>() const;
   std::array<int,2> msd();
 private:
+  static int precision;
+  static bool precType;
   std::vector<uint32_t> limbs;
   int exponent;
   friend FlowNumber operator+(const FlowNumber &l,const FlowNumber &r);
