@@ -622,6 +622,7 @@ FlowNumber operator*(const FlowNumber &l,const FlowNumber &r)
 FlowNumber operator/(FlowNumber l,const FlowNumber &r)
 {
   int i,j,k;
+  int lastPosition,divisorSize;
   int quotDigit[6]; // quotDigit[0] is for when msd(l) is 1
   FlowNumber ret,nextDigit(flowOne);
   FlowNumber multiples[6];
@@ -629,6 +630,7 @@ FlowNumber operator/(FlowNumber l,const FlowNumber &r)
   hiDigit=r.msd();
   if (hiDigit[0]==0)
     throw runtime_error("Divide by zero");
+  divisorSize=hiDigit[1];
   quotDigit[5]=7-hiDigit[0];
   j=5;
   for (i=4;i>=0;i--)
@@ -642,6 +644,16 @@ FlowNumber operator/(FlowNumber l,const FlowNumber &r)
   multiples[j]=r;
   for (i=0;i<5;i++)
     multiples[(i+1)%6]=multiples[i]*deg60;
+  lastPosition=-FlowNumber::precision;
+  while (true)
+  {
+    hiDigit=l.msd();
+    if (hiDigit[0]==0 || hiDigit[1]-divisorSize<lastPosition)
+      break;
+    nextDigit.limbs[0]=quotDigit[hiDigit[0]-1];
+    ret=ret+nextDigit<<(hiDigit[1]-divisorSize);
+    l=l+multiples[hiDigit[0]-1]<<hiDigit[1];
+  }
   return ret;
 }
 
