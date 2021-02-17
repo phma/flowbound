@@ -54,7 +54,7 @@ public:
   std::string toString();
   void normalize();
   operator std::complex<double>() const;
-  std::array<int,2> msd();
+  std::array<int,2> msd() const;
 private:
   static int precision;
   static bool precType;
@@ -63,6 +63,7 @@ private:
   friend FlowNumber operator+(const FlowNumber &l,const FlowNumber &r);
   friend FlowNumber operator-(const FlowNumber &l,const FlowNumber &r);
   friend FlowNumber operator*(const FlowNumber &l,const FlowNumber &r);
+  friend FlowNumber operator/(FlowNumber l,const FlowNumber &r);
   friend FlowNumber operator<<(const FlowNumber &l,int n);
 };
 

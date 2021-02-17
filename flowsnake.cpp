@@ -470,7 +470,7 @@ FlowNumber::operator complex<double>() const
   return (complex<double>)acc*pow((complex<double>)limbBase,exponent);
 }
 
-array<int,2> FlowNumber::msd()
+array<int,2> FlowNumber::msd() const
 /* Returns the most significant digit in [0] and its position in [1].
  * Position is relative to exponent; e.g. if passed 0.00012350000, it returns
  * 7, not -4.
@@ -616,6 +616,32 @@ FlowNumber operator*(const FlowNumber &l,const FlowNumber &r)
       }
     }
   ret.normalize();
+  return ret;
+}
+
+FlowNumber operator/(FlowNumber l,const FlowNumber &r)
+{
+  int i,j,k;
+  int quotDigit[6]; // quotDigit[0] is for when msd(l) is 1
+  FlowNumber ret,nextDigit(flowOne);
+  FlowNumber multiples[6];
+  array<int,2> hiDigit;
+  hiDigit=r.msd();
+  if (hiDigit[0]==0)
+    throw runtime_error("Divide by zero");
+  quotDigit[5]=7-hiDigit[0];
+  j=5;
+  for (i=4;i>=0;i--)
+  {
+    quotDigit[i]=quotDigit[i+1]-1;
+    if (quotDigit[i]==0)
+      quotDigit[i]=6;
+    if (quotDigit[i]==4) // When quotDigit is 4, which means -1, add the dividend
+      j=i;
+  }
+  multiples[j]=r;
+  for (i=0;i<5;i++)
+    multiples[(i+1)%6]=multiples[i]*deg60;
   return ret;
 }
 
