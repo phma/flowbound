@@ -651,8 +651,8 @@ FlowNumber operator/(FlowNumber l,const FlowNumber &r)
     if (hiDigit[0]==0 || hiDigit[1]-divisorSize<lastPosition)
       break;
     nextDigit.limbs[0]=quotDigit[hiDigit[0]-1];
-    ret=ret+nextDigit<<(hiDigit[1]-divisorSize);
-    l=l+multiples[hiDigit[0]-1]<<hiDigit[1];
+    ret=ret+(nextDigit<<(hiDigit[1]-divisorSize));
+    l=l+(multiples[hiDigit[0]-1]<<hiDigit[1]);
   }
   return ret;
 }
