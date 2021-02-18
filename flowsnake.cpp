@@ -643,7 +643,7 @@ FlowNumber operator/(FlowNumber l,const FlowNumber &r)
   }
   multiples[j]=r;
   for (i=0;i<5;i++)
-    multiples[(i+1)%6]=multiples[i]*deg60;
+    multiples[(i+j+1)%6]=multiples[(i+j)%6]*deg60;
   lastPosition=-FlowNumber::precision;
   while (true)
   {
