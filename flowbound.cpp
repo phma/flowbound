@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
   FlowNumber g("200000000000"),h(".000000000001");
   FlowNumber p("14"),rp(".1111111111111111111111");
   FlowNumber imag,half,frac,east;
+  FlowNumber one("1");
   init();
   fillTables();
   //testTables();
@@ -51,6 +52,7 @@ int main(int argc, char *argv[])
   cout<<(a/a).toString()<<' '<<(complex<double>)(a/a)<<endl;
   cout<<(a/d).toString()<<' '<<(complex<double>)(a/d)<<endl;
   cout<<(d/a).toString()<<' '<<(complex<double>)(d/a)<<endl;
+  cout<<(one/imag).toString()<<' '<<(complex<double>)(one/imag)<<endl;
   cout<<(imag).toString()<<' '<<(complex<double>)(imag)<<endl;
   cout<<(imag*imag).toString()<<' '<<(complex<double>)(imag*imag)<<endl;
   cout<<(half).toString()<<' '<<(complex<double>)(half)<<endl;
