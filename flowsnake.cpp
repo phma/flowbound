@@ -648,7 +648,7 @@ FlowNumber operator*(const FlowNumber &l,const FlowNumber &r)
 FlowNumber operator/(FlowNumber l,const FlowNumber &r)
 {
   int i,j,k;
-  int lastPosition,divisorSize;
+  int lastPosition,divisorSize,samePosCount=0,prevPos;
   int quotDigit[6]; // quotDigit[0] is for when msd(l) is 1
   FlowNumber ret,nextDigit(flowOne);
   FlowNumber multiples[6];
@@ -674,6 +674,17 @@ FlowNumber operator/(FlowNumber l,const FlowNumber &r)
   while (true)
   {
     hiDigit=l.msd();
+    if (hiDigit[1]==prevPos)
+    {
+      samePosCount++;
+      if (samePosCount==6)
+	hiDigit[1]--;
+    }
+    else
+    {
+      samePosCount=0;
+      prevPos=hiDigit[1];
+    }
     if (hiDigit[0]==0 || hiDigit[1]-divisorSize<lastPosition)
       break;
     nextDigit.limbs[0]=quotDigit[hiDigit[0]-1];
