@@ -470,17 +470,40 @@ FlowNumber::operator complex<double>() const
   return (complex<double>)acc*pow((complex<double>)limbBase,exponent);
 }
 
-array<int,2> FlowNumber::msd() const
-/* Returns the most significant digit in [0] and its position in [1].
- * Position is relative to exponent; e.g. if passed 0.00012350000, it returns
- * 7, not -4.
+array<int,3> FlowNumber::msd() const
+/* Returns the most significant digit in [0], and its position in [1], and
+ * the position of the least significant digit in [2].
+ * Position is absolute; e.g. if passed 0.00012350000, it returns
+ * {1,-4,-7}. The number must be normalized.
  */
 {
-  array<int,2> ret;
+  array<int,3> ret;
   if (limbs.size())
   {
+    ret[0]=limbs[0];
+    ret[2]=exponent*11;
+    if (ret[0]%pow7[8]==0)
+    {
+      ret[0]/=pow7[8];
+      ret[2]+=8;
+    }
+    if (ret[0]%pow7[4]==0)
+    {
+      ret[0]/=pow7[4];
+      ret[2]+=4;
+    }
+    if (ret[0]%pow7[2]==0)
+    {
+      ret[0]/=pow7[2];
+      ret[2]+=2;
+    }
+    if (ret[0]%pow7[1]==0)
+    {
+      ret[0]/=pow7[1];
+      ret[2]+=1;
+    }
     ret[0]=limbs.back();
-    ret[1]=(limbs.size()-1)*11;
+    ret[1]=(limbs.size()+exponent-1)*11;
     if (ret[0]>=pow7[8])
     {
       ret[0]/=pow7[8];
@@ -503,7 +526,10 @@ array<int,2> FlowNumber::msd() const
     }
   }
   else
+  {
     ret[0]=ret[1]=0;
+    ret[2]=11;
+  }
   return ret;
 }
 
@@ -626,7 +652,7 @@ FlowNumber operator/(FlowNumber l,const FlowNumber &r)
   int quotDigit[6]; // quotDigit[0] is for when msd(l) is 1
   FlowNumber ret,nextDigit(flowOne);
   FlowNumber multiples[6];
-  array<int,2> hiDigit;
+  array<int,3> hiDigit;
   hiDigit=r.msd();
   if (hiDigit[0]==0)
     throw runtime_error("Divide by zero");

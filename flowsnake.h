@@ -54,7 +54,7 @@ public:
   std::string toString();
   void normalize();
   operator std::complex<double>() const;
-  std::array<int,2> msd() const;
+  std::array<int,3> msd() const;
 private:
   static int precision;
   static bool precType;
