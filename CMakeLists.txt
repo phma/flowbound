@@ -23,6 +23,7 @@ endif ()
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 find_package(GMPXX REQUIRED)
 target_link_libraries(flowbound ${GMP_LIBRARY} ${GMPXX_LIBRARIES})
+find_package(BISON)
 
 install(TARGETS flowbound DESTINATION bin)
 
