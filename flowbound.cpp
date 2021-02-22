@@ -6,7 +6,19 @@
 #include <set>
 #include "eisenstein.h"
 #include "flowsnake.h"
+#include "parser.h"
 using namespace std;
+
+int yylex(yy::parser::semantic_type *val)
+{
+  *val=0;
+  return 0;
+}
+
+void yy::parser::error(const string &msg)
+{
+  cerr<<msg<<endl;
+}
 
 int main(int argc, char *argv[])
 {

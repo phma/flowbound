@@ -1,6 +1,5 @@
 project(flowbound)
 cmake_minimum_required(VERSION 3.8.0)
-add_executable(flowbound flowbound.cpp eisenstein.cpp flowsnake.cpp)
 
 include(TestBigEndian)
 include(CheckTypeSize)
@@ -22,8 +21,12 @@ endif ()
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 find_package(GMPXX REQUIRED)
-target_link_libraries(flowbound ${GMP_LIBRARY} ${GMPXX_LIBRARIES})
 find_package(BISON)
+BISON_TARGET(parser parser.y ${CMAKE_CURRENT_BINARY_DIR}/parser.cpp
+	     DEFINES_FILE ${CMAKE_CURRENT_BINARY_DIR}/parser.h)
+
+add_executable(flowbound flowbound.cpp eisenstein.cpp flowsnake.cpp ${BISON_parser_OUTPUTS})
+target_link_libraries(flowbound ${GMP_LIBRARY} ${GMPXX_LIBRARIES})
 
 install(TARGETS flowbound DESTINATION bin)
 
