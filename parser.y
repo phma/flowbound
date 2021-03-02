@@ -9,11 +9,16 @@
 
 %require "3.2"
 %language "c++"
+%define api.token.constructor
+%define api.value.type variant
 
 %{
 #include "flowsnake.h"
 #include "parser.h"
-int yylex(yy::parser::semantic_type *val);
+namespace yy
+{
+  parser::symbol_type yylex();
+}
 %}
 
 %token
@@ -51,3 +56,13 @@ exp:
 ;
 
 %%
+
+yy::parser::symbol_type yy::yylex()
+{
+  return 0;
+}
+
+void yy::parser::error(const std::string &msg)
+{
+  std::cerr<<msg<<std::endl;
+}
