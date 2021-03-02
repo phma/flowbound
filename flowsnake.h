@@ -67,4 +67,14 @@ private:
   friend FlowNumber operator<<(const FlowNumber &l,int n);
 };
 
+struct VariantNumber
+/* For parsing, represents a number which can be interpreted either way
+ * depending on the surrounding syntax.
+ */
+{
+  FlowNumber flowNumber;
+  int integer;
+  int whichValid;
+};
+
 FlowNumber complexToFlowNumber(std::complex<double> z);
