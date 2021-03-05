@@ -21,17 +21,14 @@ namespace yy
 }
 %}
 
-%token
-  PLUS	"+"
-  MINUS	"-"
-  TIMES	"*"
-  OVER	"/"
-  LPAR	"("
-  RPAR	")"
-  PREC "prec"
-  INT
-  FLOWNUM
-;
+%token PLUS;
+%token MINUS;
+%token TIMES;
+%token OVER;
+%token LPAR;
+%token RPAR;
+%token PREC;
+%token<VariantNumber> NUMBER;
 
 %%
 
@@ -47,11 +44,11 @@ line:
 ;
 
 cmd:
-  PREC INT
+  PREC NUMBER
 ;
 
 exp:
-  FLOWNUM
+  NUMBER
 | exp PLUS exp
 ;
 
