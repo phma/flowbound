@@ -677,7 +677,7 @@ FlowNumber operator/(FlowNumber l,const FlowNumber &r)
     if (hiDigit[1]==prevPos)
     {
       samePosCount++;
-      if (samePosCount==6)
+      if (samePosCount>=6)
 	hiDigit[1]--;
     }
     else
